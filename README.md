@@ -139,5 +139,5 @@ Refer to [Ftx4jConfig][src-conf] for the list of available configurations and de
 [travis-page]:https://travis-ci.org/after-the-sunrise/ftx4j
 [travis-icon]:https://travis-ci.org/after-the-sunrise/ftx4j.svg?branch=master
 [ftx-home]:https://ftx.com/#a=ftx4j
-[src-test]:https://github.com/after-the-sunrise/ftx4j/blob/master/src/main/java/com/after_sunrise/api/ftx4j/Ftx4jConfig.java
-[src-conf]:https://github.com/after-the-sunrise/ftx4j/blob/master/src/test/java/com/after_sunrise/api/ftx4j/Ftx4jApiTest.java
+[src-test]:https://github.com/after-the-sunrise/ftx4j/blob/master/src/test/java/com/after_sunrise/api/ftx4j/Ftx4jApiTest.java
+[src-conf]:https://github.com/after-the-sunrise/ftx4j/blob/master/src/main/java/com/after_sunrise/api/ftx4j/Ftx4jConfig.java
