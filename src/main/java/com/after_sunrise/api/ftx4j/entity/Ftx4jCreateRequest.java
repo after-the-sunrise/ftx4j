@@ -35,4 +35,7 @@ public abstract class Ftx4jCreateRequest {
     @Nullable
     public abstract Ftx4jExecInstType getExecInst();
 
+    @Nullable
+    public abstract String getClientId();
+
 }

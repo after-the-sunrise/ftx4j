@@ -687,13 +687,13 @@ public class Ftx4jApiImpl implements Ftx4jApi, Application, ThreadFactory {
                 NewOrderSingle message = new NewOrderSingle();
                 message.set(new HandlInst(HandlInst.AUTOMATED_EXECUTION_ORDER_PRIVATE_NO_BROKER_INTERVENTION));
                 message.set(new OrdType(OrdType.LIMIT));
-                message.set(new ClOrdID(UUID.randomUUID().toString()));
                 Optional.ofNullable(request.getSymbol()).ifPresent(v -> message.set(new Symbol(v)));
                 Optional.ofNullable(request.getSize()).ifPresent(v -> message.setString(OrderQty.FIELD, v.toPlainString()));
                 Optional.ofNullable(request.getPrice()).ifPresent(v -> message.setString(Price.FIELD, v.toPlainString()));
                 Optional.ofNullable(request.getSide()).ifPresent(v -> message.set(new Side(v.getId())));
                 Optional.ofNullable(request.getTimeInForce()).ifPresent(v -> message.set(new TimeInForce(v.getId())));
                 Optional.ofNullable(request.getExecInst()).ifPresent(v -> message.set(new ExecInst(v.getId())));
+                Optional.ofNullable(request.getClientId()).ifPresent(v -> message.setString(11, v));
 
                 context.creates.put(future, message);
 
