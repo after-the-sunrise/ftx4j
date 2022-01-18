@@ -571,6 +571,7 @@ public class Ftx4jApiImpl implements Ftx4jApi, Application, ThreadFactory {
         message.getOptionalDecimal(OrderQty.FIELD).ifPresent(b::orderQuantity);
         message.getOptionalDecimal(CumQty.FIELD).ifPresent(b::filledQuantity);
         message.getOptionalDecimal(LeavesQty.FIELD).ifPresent(b::pendingQuantity);
+        message.getOptionalDecimal(6).ifPresent(b::averageFillPrice);
         return b.build();
 
     }
@@ -693,7 +694,7 @@ public class Ftx4jApiImpl implements Ftx4jApi, Application, ThreadFactory {
                 Optional.ofNullable(request.getSide()).ifPresent(v -> message.set(new Side(v.getId())));
                 Optional.ofNullable(request.getTimeInForce()).ifPresent(v -> message.set(new TimeInForce(v.getId())));
                 Optional.ofNullable(request.getExecInst()).ifPresent(v -> message.set(new ExecInst(v.getId())));
-                Optional.ofNullable(request.getClientId()).ifPresent(v -> message.setString(11, v));
+                Optional.ofNullable(request.getClientId()).ifPresent(v -> message.setString(ClOrdID.FIELD, v));
 
                 context.creates.put(future, message);
 

@@ -41,4 +41,7 @@ public abstract class Ftx4jOrder {
     @Nullable
     public abstract BigDecimal getPendingQuantity();
 
+    @Nullable
+    public abstract BigDecimal getAverageFillPrice();
+
 }
