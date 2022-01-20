@@ -35,6 +35,7 @@ import quickfix.SessionSettings;
 import quickfix.SocketInitiator;
 import quickfix.UnsupportedMessageType;
 import quickfix.field.Account;
+import quickfix.field.AvgPx;
 import quickfix.field.ClOrdID;
 import quickfix.field.Commission;
 import quickfix.field.CumQty;
@@ -568,10 +569,10 @@ public class Ftx4jApiImpl implements Ftx4jApi, Application, ThreadFactory {
         message.getOptionalString(OrderID.FIELD).ifPresent(b::orderId);
         message.getOptionalString(Symbol.FIELD).ifPresent(b::symbol);
         message.getOptionalDecimal(Price.FIELD).ifPresent(b::orderPrice);
+        message.getOptionalDecimal(AvgPx.FIELD).ifPresent(b::averageFillPrice);
         message.getOptionalDecimal(OrderQty.FIELD).ifPresent(b::orderQuantity);
         message.getOptionalDecimal(CumQty.FIELD).ifPresent(b::filledQuantity);
         message.getOptionalDecimal(LeavesQty.FIELD).ifPresent(b::pendingQuantity);
-        message.getOptionalDecimal(6).ifPresent(b::averageFillPrice);
         return b.build();
 
     }
@@ -688,13 +689,13 @@ public class Ftx4jApiImpl implements Ftx4jApi, Application, ThreadFactory {
                 NewOrderSingle message = new NewOrderSingle();
                 message.set(new HandlInst(HandlInst.AUTOMATED_EXECUTION_ORDER_PRIVATE_NO_BROKER_INTERVENTION));
                 message.set(new OrdType(OrdType.LIMIT));
+                message.set(new ClOrdID(request.getClientId() != null ? request.getClientId() : UUID.randomUUID().toString()));
                 Optional.ofNullable(request.getSymbol()).ifPresent(v -> message.set(new Symbol(v)));
                 Optional.ofNullable(request.getSize()).ifPresent(v -> message.setString(OrderQty.FIELD, v.toPlainString()));
                 Optional.ofNullable(request.getPrice()).ifPresent(v -> message.setString(Price.FIELD, v.toPlainString()));
                 Optional.ofNullable(request.getSide()).ifPresent(v -> message.set(new Side(v.getId())));
                 Optional.ofNullable(request.getTimeInForce()).ifPresent(v -> message.set(new TimeInForce(v.getId())));
                 Optional.ofNullable(request.getExecInst()).ifPresent(v -> message.set(new ExecInst(v.getId())));
-                Optional.ofNullable(request.getClientId()).ifPresent(v -> message.setString(ClOrdID.FIELD, v));
 
                 context.creates.put(future, message);
 
