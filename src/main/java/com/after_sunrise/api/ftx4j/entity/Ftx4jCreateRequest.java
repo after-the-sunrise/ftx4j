@@ -21,6 +21,9 @@ public abstract class Ftx4jCreateRequest {
     public abstract String getSymbol();
 
     @Nullable
+    public abstract String getClientId();
+
+    @Nullable
     public abstract Ftx4jSideType getSide();
 
     @Nullable
