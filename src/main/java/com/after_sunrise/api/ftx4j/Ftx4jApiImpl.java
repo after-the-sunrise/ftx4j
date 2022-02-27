@@ -582,7 +582,7 @@ public class Ftx4jApiImpl implements Ftx4jApi, Application, ThreadFactory {
         ImmutableFtx4jExecution.Builder b = ImmutableFtx4jExecution.builder()
                 .side(message.isSetSide() ? Ftx4jSideType.MAP.get(message.getSide().getValue()) : null)
                 .timestamp(message.isSetTransactTime() ? message.getTransactTime().getValue().toInstant(UTC) : null)
-                .aggressor(message.isSetField(Ftx4jAggressorType.FIELD) ? Ftx4jAggressorType.MAP.get(message.getString(Ftx4jAggressorType.FIELD)) : null);
+                .aggressor(message.isSetField(Ftx4jAggressorType.FIELD) ? Ftx4jAggressorType.getByValue(message.getString(Ftx4jAggressorType.FIELD)) : null);
         message.getOptionalString(ClOrdID.FIELD).ifPresent(b::clientId);
         message.getOptionalString(OrderID.FIELD).ifPresent(b::orderId);
         message.getOptionalString(TradeID.FIELD).ifPresent(b::tradeId);

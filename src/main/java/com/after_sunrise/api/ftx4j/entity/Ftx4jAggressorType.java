@@ -1,11 +1,5 @@
 package com.after_sunrise.api.ftx4j.entity;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 /**
  * Only present if this message was the result of a fill.
  *
@@ -24,18 +18,22 @@ public enum Ftx4jAggressorType {
      */
     MAKER("N");
 
-    final String id;
+    final String value;
 
-    Ftx4jAggressorType(String id) {
-        this.id = id;
+    Ftx4jAggressorType(String value) {
+        this.value = value;
     }
 
-    public String getId() {
-        return id;
+    public String getValue() {
+        return value;
     }
 
-    public static final Map<String, Ftx4jAggressorType> MAP = Collections.unmodifiableMap(Stream.of(
-            Ftx4jAggressorType.values()).collect(Collectors.toMap(Ftx4jAggressorType::getId, Function.identity())));
+    @Nullable
+    public static Ftx4jAggressorType getByValue(String value) {
+        if (value.equals("Y")) return TAKER;
+        else if (value.equals("N")) return MAKER;
+        return null;
+    }
 
     public static final int FIELD = 1057; // FIX.4.4 EP21
 
